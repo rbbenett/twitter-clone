@@ -28,7 +28,6 @@ module.exports = (db) => {
           let userName = response.rows[0].username;
           req.session["userName"] = userName;
           res.send("Login Successfull!");
-          res.redirect("/");
         } else {
           res.send("Username or Password is Incorrect!");
         }
