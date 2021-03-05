@@ -20,17 +20,23 @@ module.exports = (db) => {
     let username = req.body.username;
     let password = req.body.password;
 
-    return db.query(`
+    if (!username || !password) {
+      res.status(400).send("Error: Please fill in both fields!");
+    } else if (db.query(`SELECT * FROM users WHERE username = ${username};`)) {
+      res.status(400).send("Error: This username already exists!");
+    } else {
+      return db.query(`
       INSERT INTO users (username, password)
       VALUES($1, $2)
       RETURNING *;
     `, [username, password])
-      .then(response => {
-        res.send(response)
-      })
-      .catch(e => {
-        response.send(e);
-      });
+        .then(response => {
+          res.send(response)
+        })
+        .catch(e => {
+          response.send(e);
+        });
+    }
   });
 
   return router;
