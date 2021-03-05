@@ -5,7 +5,7 @@ const baseUrl = "localhost:3004"
 chai.use(chaiHttp);
 describe("Login User API Unit Test", function () {
   let currentUser = {
-    "username": "rbenett",
+    "username": "newUser1",
     "password": "password"
   };
   let badUser = {

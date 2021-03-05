@@ -1,3 +1,6 @@
 INSERT INTO users (username, password)
 VALUES
-('rbenett', 'password')
+('newUser1', 'password');
+INSERT INTO users (username, password)
+VALUES
+('newUser2', 'password');

@@ -10,7 +10,7 @@ describe("Register User API Unit Test", function () {
     "password": "password"
   };
   let currentUser = {
-    "username": "rbenett",
+    "username": "newUser1",
     "password": "password"
   }
   it('registers a user', function (done) {
