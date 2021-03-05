@@ -5,6 +5,7 @@ const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
+const cookieSession = require('cookie-session');
 const logger = require('morgan');
 
 const PORT = process.env.PORT || 3004;
@@ -26,16 +27,27 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cookieSession({
+  name: 'session',
+  keys: ['key1'],
+
+  // Cookie Options
+  maxAge: 24 * 60 * 60 * 1000 // 24 hours
+}));
 
 // Separated Routes for each Resource
 const indexRoutes = require("./routes/index");
 const usersRoutes = require("./routes/users");
 const registerRoutes = require('./routes/register');
+const loginRoutes = require('./routes/login');
+const logoutRoutes = require('./routes/logout');
 
 // Mount all resource routes
 app.use('/', indexRoutes(db));
 app.use('/users', usersRoutes(db));
-app.use('/register', registerRoutes(db))
+app.use('/register', registerRoutes(db));
+app.use('/login', loginRoutes(db));
+app.use('/logout', logoutRoutes(db));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
