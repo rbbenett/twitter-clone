@@ -9,6 +9,10 @@ describe("Register User API Unit Test", function () {
     "username": `user${userNum}`,
     "password": "password"
   };
+  let currentUser = {
+    "username": "rbenett",
+    "password": "password"
+  }
   it('registers a user', function (done) {
     chai.request(baseUrl)
       .post('/register')
@@ -16,6 +20,16 @@ describe("Register User API Unit Test", function () {
       .end(function (err, res) {
         expect(res).to.have.status(200);
         expect(res.text).to.equal(`${newUser.username} created successfully!`);
+        done();
+      });
+  });
+  it('returns an error if user already exists', function (done) {
+    chai.request(baseUrl)
+      .post('/register')
+      .send(currentUser)
+      .end(function (err, res) {
+        expect(res).to.have.status(200);
+        expect(res.text).to.equal("user already exists in database");
         done();
       });
   });
