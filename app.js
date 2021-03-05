@@ -18,12 +18,6 @@ const dbParams = require('./lib/db.js');
 const db = new Pool(dbParams);
 db.connect();
 
-// socket io
-const server = require('http').createServer(app);
-const io = require('socket.io')(server);
-io.on('connection', () => { /* … */ });
-server.listen(3002);
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
