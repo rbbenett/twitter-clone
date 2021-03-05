@@ -3,20 +3,25 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "./node_modules/mocha/bin/mocha",
     "start": "nodemon app.js",
     "local": "./node_modules/.bin/nodemon -L --ignore public/",
     "db:reset": "node bin/resetdb.js"
   },
   "dependencies": {
+    "chai": "^4.3.3",
+    "chai-http": "^4.3.0",
     "cookie-parser": "~1.4.4",
     "cookie-session": "^1.4.0",
     "debug": "~2.6.9",
     "express": "~4.16.1",
+    "glob": "^7.1.6",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
+    "mocha": "^8.3.0",
     "morgan": "~1.9.1",
-    "pg": "^8.5.1"
+    "pg": "^8.5.1",
+    "pg-native": "^3.0.0"
   },
   "devDependencies": {
     "dotenv": "^8.2.0",

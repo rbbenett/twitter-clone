@@ -17,16 +17,18 @@ module.exports = (db) => {
   });
 
   router.post("/", (req, res) => {
-    let username = req.body['username'];
-    let password = req.body['password'];
+    let username = req.body.username;
+    let password = req.body.password;
     return db.query(`
       SELECT * FROM users
       WHERE username = $1 AND password = $2;
     `, [username, password])
       .then(response => {
         if (response.rows[0]) {
-          console.log("Login Successfull!");
-          res.send(response.rows);
+          let userName = response.rows[0].username;
+          req.session["userName"] = userName;
+          res.send("Login Successfull!");
+          res.redirect("/");
         } else {
           res.send("Username or Password is Incorrect!");
         }

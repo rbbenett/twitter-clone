@@ -31,16 +31,17 @@ module.exports = (db) => {
     WHERE username = $1;
     `, [username])
       .then(response => {
-        if (response.rows.length === 0) {
+        if (!response.rows.length) {
           return db.query(`
       INSERT INTO users (username, password)
       VALUES($1, $2)
       RETURNING *;
     `, [username, password])
             .then(response => {
-              req.session.user_id = response.rows;
-              res.send(response.rows[0]);
-
+              let userName = response.rows[0].username;
+              req.session["userName"] = userName;
+              res.send(`${userName} created successfully!`);
+              return response.rows[0] ? response.rows[0] : null;
             })
             .catch(err => {
               console.log(err);
