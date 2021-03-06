@@ -41,6 +41,7 @@ const usersRoutes = require("./routes/users");
 const registerRoutes = require('./routes/register');
 const loginRoutes = require('./routes/login');
 const logoutRoutes = require('./routes/logout');
+const tweetRoutes = require('./routes/tweets');
 
 // Mount all resource routes
 app.use('/', indexRoutes(db));
@@ -48,6 +49,7 @@ app.use('/users', usersRoutes(db));
 app.use('/register', registerRoutes(db));
 app.use('/login', loginRoutes(db));
 app.use('/logout', logoutRoutes(db));
+app.use('/tweets', tweetRoutes(db));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
