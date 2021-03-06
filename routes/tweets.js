@@ -34,18 +34,17 @@ module.exports = (db) => {
   });
 
   router.put("/", (req, res) => {
-    let user_id = req.body.user_id;
+    let tweets_id = req.body.id;
     let content = req.body.text;
 
     return db.query(`
       UPDATE tweets
       SET content = $2
-      WHERE user_id = $1
+      WHERE id = $1
       RETURNING *;
-    `, [user_id, content])
+    `, [tweets_id, content])
       .then(response => {
         res.send("tweet updated successfully!");
-        return res.rows[0];
       })
       .catch(err => {
         return console.log('query error:', err);
@@ -54,16 +53,15 @@ module.exports = (db) => {
 
   router.delete("/", (req, res) => {
 
-    let tweetsId = req.body.id;
+    let tweet_id = req.body.id;
 
     return db.query(`
       DELETE FROM tweets
       WHERE id = $1
       RETURNING *;
-    `, [tweetsId])
+    `, [tweet_id])
     .then(response => {
       res.send("tweet deleted successfully!");
-      return res.rows[0];
     })
     .catch(err => {
       return console.log('query error:', err);

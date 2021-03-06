@@ -10,8 +10,12 @@ describe("Tweet API Unit Test", function () {
   };
 
   const updatedTweet = {
-    "user_id": "1",
+    "id": "1",
     "text": "This is an updated tweet!"
+  }
+
+  const deletedTweet = {
+    "id": "2"
   }
 
   it('creates a new tweet', function (done) {
@@ -39,7 +43,7 @@ describe("Tweet API Unit Test", function () {
   it('deletes an existing tweet', function (done) {
     chai.request(baseUrl)
       .delete('/tweets')
-      .send(updatedTweet)
+      .send(deletedTweet)
       .end(function (err, res) {
         expect(res).to.have.status(200);
         expect(res.text).to.equal("tweet deleted successfully!");
