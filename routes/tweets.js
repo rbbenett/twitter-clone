@@ -26,7 +26,6 @@ module.exports = (db) => {
     `, [user_id, content])
       .then(response => {
         res.send("tweet created successfully!");
-        return res.rows[0];
       })
       .catch(err => {
         return console.log('query error:', err);

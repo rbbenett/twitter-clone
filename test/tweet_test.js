@@ -29,6 +29,15 @@ describe("Tweet API Unit Test", function () {
       });
   });
 
+  it ('gets all tweets', function(done) {
+    chai.request(baseUrl)
+    .get('/tweets')
+    .end(function (err, res) {
+      expect(res).to.have.status(200);;
+      done();
+    });
+  });
+
   it('updates an existing tweet', function (done) {
     chai.request(baseUrl)
       .put('/tweets')
