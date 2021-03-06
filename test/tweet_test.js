@@ -6,12 +6,12 @@ chai.use(chaiHttp);
 describe("Tweet API Unit Test", function () {
   const newTweet = {
     "user_id": "1",
-    "content": "This is a test tweet!"
+    "text": "This is a test tweet!"
   };
 
   const updatedTweet = {
     "user_id": "1",
-    "content": "This is an updated tweet!"
+    "text": "This is an updated tweet!"
   }
 
   it('creates a new tweet', function (done) {
